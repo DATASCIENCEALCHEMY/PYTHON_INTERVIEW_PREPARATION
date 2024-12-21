@@ -1,0 +1,17 @@
+#FIND OUT THE COMMON LETTERS BETWEEN TWO STRINGS
+
+def common_letters():
+    string1 = input("Enter string 1 :")
+    string2 = input("Enter string2 :")
+
+    s1 = set(string1)
+    s2 = set(string2)
+
+    print(s1)
+    print(s2)
+
+    com = s1 & s2
+    print("common letter is :",com)
+
+    
+common_letters()
