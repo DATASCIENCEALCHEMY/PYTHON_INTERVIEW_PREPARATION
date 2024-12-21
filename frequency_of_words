@@ -1,0 +1,24 @@
+
+
+def freq_words() : 
+
+    str = input("Enter a Sentence ")
+    list =str.split()
+    dict = {}
+    for i in list :
+        if i not in dict.keys() :
+            dict[i]= 0
+        dict[i]= dict[i] + 1
+    print(dict)
+
+    
+    
+
+    
+
+
+
+    
+# sentence = "Sheena loves eating apple and Mango .Her Sister also loves eating apple and Mango."
+
+freq_words()
