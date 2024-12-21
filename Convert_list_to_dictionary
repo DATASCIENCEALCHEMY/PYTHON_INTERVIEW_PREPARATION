@@ -1,0 +1,26 @@
+# Write a Program to convert two list in a dictionary
+def list_to_dict():
+    list1 = ['Kimi','Naina','Sheena',"kia"]
+    list2 = [856523,456897,562356,45645,235666]
+    result = dict(zip(list2,list1))
+
+    print(result)
+
+list_to_dict()
+
+def dict_to_tuple():
+    x = {856523: 'Kimi', 456897: 'Naina', 562356: 'Sheena', 45645: 'kia'}
+    for i in x.items():
+        print(i)
+dict_to_tuple()
+# #In Python, the main difference between a tuple and a dictionary is that a tuple is a fixed-size collection, while a dictionary is a collection of arbitrary size: 
+# Tuple
+# A tuple is a collection of elements separated by commas and enclosed in parentheses. Tuples are ordered and unchangeable, and they allow duplicate members.
+# Dictionary
+# A dictionary is a collection of key-value pairs, where each key is unique and associated with a value. Dictionaries are unordered and changeable, and they do not allow duplicate members.
+
+
+d1 = {856523: 'Kimi', 456897: 'Naina', 562356: 'Sheena', 45645: 'kia'}
+d1[856523]= "imimk"
+print(d1)
+
