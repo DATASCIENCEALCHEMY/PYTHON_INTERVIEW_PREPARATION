@@ -1,21 +1,22 @@
 
-
+# frequency of words
 def freq_words() : 
-
+# this is user input
     str = input("Enter a Sentence ")
     list =str.split()
     dict = {}
+    # this is for loop 
     for i in list :
         if i not in dict.keys() :
             dict[i]= 0
         dict[i]= dict[i] + 1
-    print(dict)
+    print(dict)     
 
     
     
 # for i in li :
 #    dict[i]=dict.get(i,0) + 1
- #  print(dict)
+#   print(dict)
     
 
 
