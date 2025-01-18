@@ -1,0 +1,32 @@
+import requests
+import pandas as pd
+web = requests.get("https://courses.analyticsvidhya.com/pages/all-free-courses")
+#print(web)
+web.content
+web.url
+web.status_code
+from bs4 import BeautifulSoup 
+soup = BeautifulSoup(web.content, "html.parser")
+#print(soup)
+#print(soup.prettify())
+soup.title
+soup.title.name
+print('in web scrapping')
+
+   # List to store course data
+courses = []
+    
+    # Find all course elements (adjust based on actual HTML structure)
+course_cards = soup.find_all("div", class_="course-card__body")  # Replace 'course-card' with the actual class name
+
+   # print(course_cards)
+
+for course in course_cards:
+        title = course.find("h3").text.strip() if course.find("h3") else "N/A"
+        courses.append(title)
+print(courses)
+print(len(courses))
+
+
+df  = pd.DataFrame(courses,index=False) 
+print(df) 

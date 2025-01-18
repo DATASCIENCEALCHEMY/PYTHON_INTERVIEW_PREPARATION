@@ -1,0 +1,5 @@
+# Add numbers using lambda functions
+
+# define a lambda function to add two numbers
+
+add_numbers = lambda x,y : 

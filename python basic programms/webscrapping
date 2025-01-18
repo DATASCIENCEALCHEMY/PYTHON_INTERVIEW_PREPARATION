@@ -1,0 +1,67 @@
+import requests
+from bs4 import BeautifulSoup
+
+# Sample URL (replace this with the actual URL)
+url = 'https://courses.analyticsvidhya.com/courses/choosing-the-right-LLM-for-your-business'
+
+# Send an HTTP request to the URL
+response = requests.get(url)
+response.raise_for_status()  # Ensure the request was successful
+
+# Parse the HTML content with BeautifulSoup
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# Find the container that holds the course curriculum
+course_curriculum_container = soup.find('div', class_='course-curriculum__container')
+
+# Find all course chapters (each <li> element with class 'course-curriculum__chapter')
+chapters = course_curriculum_container.find_all('li', class_='course-curriculum__chapter')
+
+# Iterate through the chapters and extract the relevant information
+course_data = []
+
+for chapter in chapters:
+    # Extract the chapter number and title
+    chapter_number = chapter.find('span', class_='course-curriculum__chapter-number').text.strip()
+    chapter_title = chapter.find('h5', class_='course-curriculum__chapter-title').text.strip()
+    
+    # Find the list of lessons within each chapter
+    lessons = []
+    lesson_items = chapter.find_all('li')
+    
+    for lesson_item in lesson_items:
+        # Extract lesson title and content type (video, quiz, etc.)
+        lesson = lesson_item.find('span', class_='course-curriculum__chapter-lesson')
+        lesson_title = lesson.text.strip()
+        icon = lesson.find('i')
+        
+        # Determine lesson type based on the icon class
+        if icon and 'toga-icon-content-video' in icon.get('class', []):
+            lesson_type = 'Video'
+        elif icon and 'toga-icon-content-text' in icon.get('class', []):
+            lesson_type = 'Reading'
+        elif icon and 'toga-icon-content-download' in icon.get('class', []):
+            lesson_type = 'Download'
+        elif icon and 'toga-icon-content-quiz' in icon.get('class', []):
+            lesson_type = 'Quiz'
+        else:
+            lesson_type = 'Unknown'
+        
+        lessons.append({
+            'lesson_title': lesson_title,
+            'lesson_type': lesson_type
+        })
+    
+    # Add the chapter details and its lessons to the course_data
+    course_data.append({
+        'chapter_number': chapter_number,
+        'chapter_title': chapter_title,
+        'lessons': lessons
+    })
+
+# Print the structured course data
+for chapter in course_data:
+    print(f"Chapter {chapter['chapter_number']}: {chapter['chapter_title']}")
+    for lesson in chapter['lessons']:
+        print(f"  - {lesson['lesson_title']} ({lesson['lesson_type']})")
+    print()
